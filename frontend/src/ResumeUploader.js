@@ -15,11 +15,13 @@ const ResumeUploader = () => {
     formData.append('resume', file);
 
     try {
-      const response = await axios.post('YOUR_API_ENDPOINT', formData, {
+      const response = await axios.post('http://127.0.0.1:5000/recommend', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+      console.log(formData);
+      console.log(response.data)
       setData(response.data);
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -49,7 +51,7 @@ const ResumeUploader = () => {
             Upload
           </button>
         </form>
-        {data.length > 0 && (
+        {/* {data.length > 0 && (
           <div className="mt-6">
             <h3 className="text-lg font-semibold mb-2">API Response</h3>
             <table className="min-w-full bg-white border border-gray-200">
@@ -69,7 +71,7 @@ const ResumeUploader = () => {
               </tbody>
             </table>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

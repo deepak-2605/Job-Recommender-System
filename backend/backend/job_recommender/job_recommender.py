@@ -16,10 +16,10 @@ import job_recommender.skills_extraction as skills_extraction
 
 # Load dataset:
 def getRecommendations(file_path):
-        jd_df=pd.read_csv('jd_structured_data.csv')
+        jd_df=pd.read_csv('job_recommender/jd_structured_data.csv')
 
         # Load the extracted resume skills:
-        file_path=r'job_recommender.job_recommender.CV_2.pdf'
+        # file_path=r'job_recommender/CV_2.pdf'
         skills=[]
         skills.append(' '.join(word for word in skills_extraction.skills_extractor(file_path)))
         print(skills)
