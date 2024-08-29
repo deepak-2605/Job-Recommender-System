@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import CustomTable from "../src/components/CustomTable/CustomTable"; // Adjust the import path as needed
 
@@ -21,9 +21,20 @@ const ResumeUploader = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(formData);
-      console.log(response.data);
-      setData(response.data);
+      setData(response.data)
+      // console.log(data)
+      // Assuming the response is an array of job recommendations
+      const responseData = response.data.map((row, index) => ({
+        index: index + 1,
+        company_name: row['Company Name'],  // Matching the key exactly as it appears in the response
+        average_revenue: row['Average Revenue'],
+        average_salary: row['Average Salary'],
+        // competitors: row['Competitors'],
+        competitors: row['Competitors'] === '-1' ? 'No Data' : row['Competitors'],
+        founded: row['Founded'],
+      }));
+      console.log("responseData, ",responseData)
+      setData(responseData);
     } catch (error) {
       console.error('Error uploading file:', error);
     }
@@ -56,78 +67,9 @@ const ResumeUploader = () => {
       accessor: "founded",
     },
   ];
-  useEffect(()=>{
-    const rawData = [
-  {
-    index: 1,
-    job_designation: "Software Engineer",
-    createdAt: "2023-05-15",
-    application_deadline: "2023-09-15",
-    company_name: "Tech Innovators",
-    average_revenue: 150000,
-    average_salary: 120,
-    competitors: "InnoSoft, CodeCraft",
-    founded: 2015,
-  },
-  {
-    index: 2,
-    job_designation: "Data Scientist",
-    createdAt: "2023-06-01",
-    application_deadline: "2023-10-01",
-    company_name: "Data Wizards",
-    average_revenue: 200000,
-    average_salary: 130,
-    competitors: "DataGurus, InfoInsights",
-    founded: 2010,
-  },
-  {
-    index: 3,
-    job_designation: "Product Manager",
-    createdAt: "2023-07-10",
-    application_deadline: "2023-11-10",
-    company_name: "Product Pioneers",
-    average_revenue: 300000,
-    average_salary: 150,
-    competitors: "ProdMan, InnovateCorp",
-    founded: 2012,
-  },
-  {
-    index: 4,
-    job_designation: "UX/UI Designer",
-    createdAt: "2023-08-05",
-    application_deadline: "2023-12-05",
-    company_name: "Design Dynamics",
-    average_revenue: 100000,
-    average_salary: 110,
-    competitors: "DesignFlow, CreateSpace",
-    founded: 2018,
-  },
-  {
-    index: 5,
-    job_designation: "Marketing Specialist",
-    createdAt: "2023-04-20",
-    application_deadline: "2023-08-20",
-    company_name: "Market Masters",
-    average_revenue: 250000,
-    average_salary: 140,
-    competitors: "BrandBoost, MarketGenius",
-    founded: 2005,
-  },
-];
 
-    const datat = rawData.map((row, index) => ({
-    index: index + 1,
-    company_name: row['company_name'],
-    average_revenue: row['average_revenue'],
-    average_salary: row['average_salary'],
-    competitors: row['competitors'],
-    founded: row['founded'],
-   
-  }));
-  setData(datat);
-  }, []);
   return (
-   <div className="mx-auto flex flex-col justify-center items-center bg-gray-100 px-4 sm:px-6 lg:px-8">
+    <div className="mx-auto flex flex-col justify-center items-center bg-gray-100 px-4 sm:px-6 lg:px-8">
       <div className="text-3xl font-bold mb-8 text-center">
         Job Recommendation System
       </div>
