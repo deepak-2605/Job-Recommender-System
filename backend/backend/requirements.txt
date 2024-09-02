@@ -10,6 +10,7 @@ docx
 nltk
 spacy
 python-docx
+scipy
 scikit-learn
 ftfy
 PyPDF2
