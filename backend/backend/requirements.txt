@@ -17,3 +17,4 @@ pyresparser
 streamlit
 flask
 Flask
+flask_cors
