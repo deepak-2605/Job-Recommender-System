@@ -21,7 +21,9 @@ def recommend_jobs():
 
     # Return the recommendations as a JSON response
     return jsonify(recommendations)
- 
+
 if __name__ == '__main__':
-    port = int(os.getenv("PORT", 5000))  # Default to port 5000 if PORT is not set
-    app.run(debug=True, port=port)
+    # Use the PORT environment variable defined by Render, default to 5000 if not set
+    port = int(os.getenv("PORT", 5000))
+    # Bind to 0.0.0.0 to allow the service to be accessible externally
+    app.run(debug=True, host='0.0.0.0', port=port)
