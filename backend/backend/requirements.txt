@@ -15,3 +15,5 @@ ftfy
 PyPDF2
 pyresparser
 streamlit
+flask
+Flask
